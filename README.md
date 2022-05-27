@@ -1,16 +1,14 @@
 # poke_app
 
-A new Flutter project.
+This is a the first version of my pokedex that consumes [https://rickandmortyapi.com/](https://pokeapi.co/api/v2/) data, it has been developed for mobile devices using flutter, it hasn't been optimized for web.
 
-## Getting Started
+Clone this project.
+git clone https://github.com/juanp88/pokedex.git
 
-This project is a starting point for a Flutter application.
+Install required packages.
+flutter pub get
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+API Endpoints Used
+https://pokeapi.co/api/v2/pokemon/
+https://pokeapi.co/api/v2/pokemon?limit=20&offset=0
+https://pokeapi.co/api/v2/pokemon-species/
