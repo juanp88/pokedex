@@ -3,7 +3,6 @@ import 'package:poke_app/models/pokemon.dart';
 import 'package:poke_app/view/pokemon_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../view/poke_detail_screen.dart';
 import '../view_model/pokemon_view_model.dart';
 
 class SearchBar extends StatefulWidget {
@@ -49,42 +48,50 @@ class _SearchBarState extends State<SearchBar> {
           ),
           hintText: "What Pokémon are you looking for? ",
         ),
-        onSubmitted: (value) {
+        onSubmitted: (value) async {
           if (value.isNotEmpty) {
-            Pokemon pokemon = providerData.getPokemonDetails(name: value);
-            //_getPokemon(value);
+            Pokemon? pokemon = await providerData.searchPokemonByName(
+                name: value.toLowerCase());
 
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  return ScaleTransition(
-                    alignment: Alignment.center,
-                    scale: Tween<double>(begin: 0.1, end: 1).animate(
-                      CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.easeOutQuart,
+            if (pokemon != null) {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return ScaleTransition(
+                      alignment: Alignment.center,
+                      scale: Tween<double>(begin: 0.1, end: 1).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.easeOutQuart,
+                        ),
                       ),
-                    ),
-                    child: child,
-                  );
-                },
-                transitionDuration: const Duration(milliseconds: 500),
-                pageBuilder: (BuildContext context, Animation<double> animation,
-                    Animation<double> secondaryAnimation) {
-                  return PokemonScreen(pokemon: pokemon);
-                },
-              ),
-            );
+                      child: child,
+                    );
+                  },
+                  transitionDuration: const Duration(milliseconds: 500),
+                  pageBuilder: (BuildContext context,
+                      Animation<double> animation,
+                      Animation<double> secondaryAnimation) {
+                    return PokemonScreen(pokemon: pokemon);
+                  },
+                ),
+              );
+            } else {
+              // Show error message if Pokemon not found
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Pokémon "$value" not found!'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
           }
         },
       ),
     );
   }
 
-  _getPokemon(String value) async {
-    final providerData = Provider.of<PokemonViewModel>(context);
-    return await providerData.getPokemonDetails(name: value);
-  }
+  // Removed unused _getPokemon method
 }

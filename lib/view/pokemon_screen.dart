@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:poke_app/helpers/map_cardColor.dart';
 import 'package:poke_app/models/pokemon.dart';
-import '../models/pokemons_detail_model.dart';
 import '../widgets/aboutpokemon_widget.dart';
 
 class PokemonScreen extends StatefulWidget {
   final Pokemon? pokemon;
-  const PokemonScreen({Key? key, required this.pokemon}) : super(key: key);
+  const PokemonScreen({super.key, required this.pokemon});
 
   @override
   State<PokemonScreen> createState() => _PokemonScreenState();

@@ -10,11 +10,12 @@ import '../helpers/map_cardColor.dart';
 import '../models/pokemons_detail_model.dart';
 
 class PokeCard extends StatelessWidget {
-  CardModel poke;
-  Pokemon? pokeDetail;
+  final CardModel poke;
+  final Pokemon? pokeDetail;
   final BuildContext context;
 
-  PokeCard(this.poke, this.pokeDetail, this.context);
+  const PokeCard(this.poke, this.pokeDetail, this.context, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

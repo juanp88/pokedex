@@ -6,9 +6,10 @@ import '../helpers/map_cardColor.dart';
 
 class PokeAbout extends StatelessWidget {
   final Pokemon pokeData;
-  PokeAbout(this.pokeData);
 
-  String convertValue(value) {
+  const PokeAbout(this.pokeData, {Key? key}) : super(key: key);
+
+  String convertValue(dynamic value) {
     double convertedValue = value / 10;
     return convertedValue.toString();
   }
@@ -21,17 +22,24 @@ class PokeAbout extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+          SizedBox(
             width: 80,
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
-          SizedBox(width: 25),
-          Text(value),
+          const SizedBox(width: 25),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -62,11 +70,11 @@ class PokeAbout extends StatelessWidget {
                 rowBuilder('Weight', convertValue(pokeData.weight) + ' kg'),
                 rowBuilder(
                   'Abilities',
-                  toBeginningOfSentenceCase(pokeData.ability1)! +
+                  toBeginningOfSentenceCase<String?>(pokeData.ability1)! +
                       '\n' +
-                      toBeginningOfSentenceCase(pokeData.ability2)! +
+                      toBeginningOfSentenceCase<String?>(pokeData.ability2)! +
                       '\n' +
-                      toBeginningOfSentenceCase(pokeData.ability3)!,
+                      toBeginningOfSentenceCase<String?>(pokeData.ability3)!,
                 ),
               ],
             ),

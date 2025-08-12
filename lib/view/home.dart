@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:poke_app/models/pokemon_model.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
 import 'package:poke_app/widgets/home_header.dart';
 import 'package:poke_app/widgets/pokemon_listview.dart';
@@ -15,11 +14,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
 
+  @override
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+      // Trigger loading when user is near the bottom (200px before end)
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
         context.read<PokemonViewModel>().getMorePokemons();
       }
     });
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     : Expanded(
                         flex: 4,
-                        child: PokemonListView(
+                        child: pokemonListView(
                             pokemonViewModel, _scrollController),
                         // child: Placeholder(
                         //   color: Colors.amberAccent,

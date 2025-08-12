@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../helpers/map_cardColor.dart';
@@ -7,9 +5,10 @@ import '../models/pokemon.dart';
 
 class PokeStats extends StatelessWidget {
   final Pokemon pokeData;
-  PokeStats(this.pokeData);
 
-  String convertValue(value) {
+  const PokeStats(this.pokeData, {Key? key}) : super(key: key);
+
+  String convertValue(double value) {
     double initValue = value * 100;
     return initValue.toStringAsFixed(0);
   }
@@ -19,34 +18,46 @@ class PokeStats extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              color: setTypeColor(pokeData.type1),
+          // Fixed width for label to ensure alignment
+          SizedBox(
+            width: 50,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: setTypeColor(pokeData.type1),
+                fontSize: 12,
+              ),
             ),
           ),
-          Spacer(),
-          Text(
-            convertValue(value),
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              color: setTypeColor(pokeData.type1),
+          const SizedBox(width: 8),
+          // Fixed width for value to ensure alignment
+          SizedBox(
+            width: 35,
+            child: Text(
+              convertValue(value),
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: setTypeColor(pokeData.type1),
+                fontSize: 12,
+              ),
+              textAlign: TextAlign.end,
             ),
           ),
-          Container(
-            width: 250,
-            height: 10,
-            margin: EdgeInsets.only(left: 15),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              child: LinearProgressIndicator(
-                backgroundColor: Colors.grey[300],
-                valueColor:
-                    AlwaysStoppedAnimation<Color>(setCardColor(pokeData.type1)),
-                value: value,
+          const SizedBox(width: 12),
+          // Flexible progress bar that adapts to available space
+          Expanded(
+            child: Container(
+              height: 8,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                child: LinearProgressIndicator(
+                  backgroundColor: Colors.grey[300],
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      setCardColor(pokeData.type1)),
+                  value: value,
+                ),
               ),
             ),
           ),
@@ -61,7 +72,7 @@ class PokeStats extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
       child: Column(
         children: [
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           statsBar('HP', pokeData.hp),
           statsBar('ATK', pokeData.attack),
           statsBar('DEF', pokeData.defense),

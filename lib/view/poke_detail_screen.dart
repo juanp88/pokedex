@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
 import 'package:poke_app/models/pokemon.dart';
-import 'package:poke_app/models/pokemons_detail_model.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
 import 'package:provider/provider.dart';
 
