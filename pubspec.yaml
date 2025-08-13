@@ -34,6 +34,9 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_native_splash: ^2.4.0
   intl: ^0.20.0
+  # Internationalization
+  flutter_localizations:
+    sdk: flutter
   # Caching dependencies
   shared_preferences: ^2.2.2
   hive: ^2.2.3
@@ -66,6 +69,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,0 +1,307 @@
+{
+  "@@locale": "en",
+  "appTitle": "PokeApp",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "pokedexTitle": "Pokedex",
+  "@pokedexTitle": {
+    "description": "The main title displayed on the home screen"
+  },
+  "searchHint": "What Pokémon are you looking for?",
+  "@searchHint": {
+    "description": "Placeholder text for the search input"
+  },
+  "loadingMorePokemon": "Loading more Pokémon...",
+  "@loadingMorePokemon": {
+    "description": "Text shown when loading more Pokemon in pagination"
+  },
+  "usingCachedData": "Using cached data",
+  "@usingCachedData": {
+    "description": "Banner text when app is using cached data"
+  },
+  "noInternetConnection": "No Internet Connection",
+  "@noInternetConnection": {
+    "description": "Title when there's no internet connection"
+  },
+  "noInternetMessage": "No cached Pokemon data available.\\nConnect to the internet to load Pokemon.",
+  "@noInternetMessage": {
+    "description": "Message when offline with no cached data"
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Button text to retry connection"
+  },
+  "cacheManagement": "Cache Management",
+  "@cacheManagement": {
+    "description": "Title for cache management screen"
+  },
+  "cacheStatistics": "Cache Statistics",
+  "@cacheStatistics": {
+    "description": "Section title for cache statistics"
+  },
+  "pokemonDetailsCached": "Pokemon Details Cached",
+  "@pokemonDetailsCached": {
+    "description": "Label for cached Pokemon details count"
+  },
+  "pokemonCardsCached": "Pokemon Cards Cached",
+  "@pokemonCardsCached": {
+    "description": "Label for cached Pokemon cards count"
+  },
+  "mainListCached": "Main List Cached",
+  "@mainListCached": {
+    "description": "Label for main list cache status"
+  },
+  "cacheSize": "Cache Size",
+  "@cacheSize": {
+    "description": "Label for cache size"
+  },
+  "cacheActions": "Cache Actions",
+  "@cacheActions": {
+    "description": "Section title for cache actions"
+  },
+  "clearExpiredCache": "Clear Expired Cache",
+  "@clearExpiredCache": {
+    "description": "Action to clear expired cache"
+  },
+  "clearExpiredCacheDesc": "Remove only expired cache entries",
+  "@clearExpiredCacheDesc": {
+    "description": "Description for clear expired cache action"
+  },
+  "preCacheImages": "Pre-cache Images",
+  "@preCacheImages": {
+    "description": "Action to pre-cache images"
+  },
+  "preCacheImagesDesc": "Download images for offline viewing",
+  "@preCacheImagesDesc": {
+    "description": "Description for pre-cache images action"
+  },
+  "clearAllCache": "Clear All Cache",
+  "@clearAllCache": {
+    "description": "Action to clear all cache"
+  },
+  "clearAllCacheDesc": "Remove all cached data",
+  "@clearAllCacheDesc": {
+    "description": "Description for clear all cache action"
+  },
+  "aboutCaching": "About Caching",
+  "@aboutCaching": {
+    "description": "Section title for cache information"
+  },
+  "cacheBenefits": "Cache Benefits:",
+  "@cacheBenefits": {
+    "description": "Subsection title for cache benefits"
+  },
+  "fasterLoading": "• Faster app loading times",
+  "@fasterLoading": {
+    "description": "Cache benefit point"
+  },
+  "reducedDataUsage": "• Reduced data usage",
+  "@reducedDataUsage": {
+    "description": "Cache benefit point"
+  },
+  "worksOffline": "• Works offline for cached Pokemon",
+  "@worksOffline": {
+    "description": "Cache benefit point"
+  },
+  "imagesCached": "• Images cached for offline viewing",
+  "@imagesCached": {
+    "description": "Cache benefit point"
+  },
+  "improvedExperience": "• Improved user experience",
+  "@improvedExperience": {
+    "description": "Cache benefit point"
+  },
+  "cacheDetails": "Cache Details:",
+  "@cacheDetails": {
+    "description": "Subsection title for cache details"
+  },
+  "cacheExpires": "• Cache expires after 24 hours",
+  "@cacheExpires": {
+    "description": "Cache detail point"
+  },
+  "autoClears": "• Automatically clears expired data",
+  "@autoClears": {
+    "description": "Cache detail point"
+  },
+  "storesData": "• Stores Pokemon details and images",
+  "@storesData": {
+    "description": "Cache detail point"
+  },
+  "autoImageCache": "• Images auto-cached when viewed online",
+  "@autoImageCache": {
+    "description": "Cache detail point"
+  },
+  "manualImageCache": "• Manual image pre-caching available",
+  "@manualImageCache": {
+    "description": "Cache detail point"
+  },
+  "safeToClear": "• Safe to clear anytime",
+  "@safeToClear": {
+    "description": "Cache detail point"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+  "clearAllCacheTitle": "Clear All Cache",
+  "@clearAllCacheTitle": {
+    "description": "Dialog title for clearing all cache"
+  },
+  "clearAllCacheMessage": "This will remove all cached Pokemon data. The app will need to reload data from the internet.",
+  "@clearAllCacheMessage": {
+    "description": "Dialog message for clearing all cache"
+  },
+  "preCacheImagesTitle": "Pre-cache Images",
+  "@preCacheImagesTitle": {
+    "description": "Dialog title for pre-caching images"
+  },
+  "preCacheImagesMessage": "This will download Pokemon images for offline viewing. This may take a few minutes and use data.",
+  "@preCacheImagesMessage": {
+    "description": "Dialog message for pre-caching images"
+  },
+  "cacheCleared": "Cache cleared successfully",
+  "@cacheCleared": {
+    "description": "Success message when cache is cleared"
+  },
+  "expiredCacheCleared": "Expired cache cleared successfully",
+  "@expiredCacheCleared": {
+    "description": "Success message when expired cache is cleared"
+  },
+  "startingImageCache": "Starting image pre-caching...",
+  "@startingImageCache": {
+    "description": "Message when starting image pre-caching"
+  },
+  "imagesCacheComplete": "Images pre-cached successfully",
+  "@imagesCacheComplete": {
+    "description": "Success message when images are pre-cached"
+  },
+  "errorClearingCache": "Error clearing cache: {error}",
+  "@errorClearingCache": {
+    "description": "Error message when clearing cache fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingStats": "Error loading cache stats: {error}",
+  "@errorLoadingStats": {
+    "description": "Error message when loading cache stats fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorPreCachingImages": "Error pre-caching images: {error}",
+  "@errorPreCachingImages": {
+    "description": "Error message when pre-caching images fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "pokemonNotFound": "Pokémon \"{name}\" not found!",
+  "@pokemonNotFound": {
+    "description": "Error message when Pokemon search fails",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "refreshStats": "Refresh Stats",
+  "@refreshStats": {
+    "description": "Tooltip for refresh stats button"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes response"
+  },
+  "no": "No",
+  "@no": {
+    "description": "No response"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Generic loading text"
+  },
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": "Unknown value placeholder"
+  },
+  "species": "Species",
+  "@species": {
+    "description": "Pokemon species label"
+  },
+  "height": "Height",
+  "@height": {
+    "description": "Pokemon height label"
+  },
+  "weight": "Weight",
+  "@weight": {
+    "description": "Pokemon weight label"
+  },
+  "abilities": "Abilities",
+  "@abilities": {
+    "description": "Pokemon abilities label"
+  },
+  "stats": "Stats",
+  "@stats": {
+    "description": "Pokemon stats tab label"
+  },
+  "about": "About",
+  "@about": {
+    "description": "Pokemon about tab label"
+  },
+  "moves": "Moves",
+  "@moves": {
+    "description": "Pokemon moves tab label"
+  },
+  "offlineMode": "Offline mode",
+  "@offlineMode": {
+    "description": "Text shown when app is in offline mode"
+  },
+  "pokedexData": "Pokedex Data",
+  "@pokedexData": {
+    "description": "Section title for Pokemon data"
+  },
+  "hp": "HP",
+  "@hp": {
+    "description": "Health Points stat abbreviation"
+  },
+  "atk": "ATK",
+  "@atk": {
+    "description": "Attack stat abbreviation"
+  },
+  "def": "DEF",
+  "@def": {
+    "description": "Defense stat abbreviation"
+  },
+  "satk": "SATK",
+  "@satk": {
+    "description": "Special Attack stat abbreviation"
+  },
+  "sdef": "SDEF",
+  "@sdef": {
+    "description": "Special Defense stat abbreviation"
+  },
+  "spd": "SPD",
+  "@spd": {
+    "description": "Speed stat abbreviation"
+  },
+  "meters": "m",
+  "@meters": {
+    "description": "Meters unit abbreviation"
+  },
+  "kilograms": "kg",
+  "@kilograms": {
+    "description": "Kilograms unit abbreviation"
+  }
+}

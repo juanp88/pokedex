@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../l10n/app_localizations.dart';
 import 'package:poke_app/helpers/map_cardColor.dart';
 import 'package:poke_app/models/pokemon.dart';
 import '../widgets/aboutpokemon_widget.dart';
@@ -62,9 +63,9 @@ class _PokemonScreenState extends State<PokemonScreen>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red.shade900,
-        title: const Text(
-          'Pokemon',
-          style: TextStyle(color: Colors.yellow),
+        title: Text(
+          AppLocalizations.of(context)!.appTitle,
+          style: const TextStyle(color: Colors.yellow),
         ),
         centerTitle: true,
       ),
@@ -123,9 +124,9 @@ class _PokemonScreenState extends State<PokemonScreen>
                             labelColor: Colors.black,
                             unselectedLabelColor: Colors.grey,
                             controller: _tabController,
-                            tabs: const [
-                              Text('About'),
-                              Text('Base Stats'),
+                            tabs: [
+                              Text(AppLocalizations.of(context)!.about),
+                              Text(AppLocalizations.of(context)!.stats),
                             ],
                           ),
                         ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../l10n/app_localizations.dart';
 
 import 'package:poke_app/models/pokemon.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
 import 'package:provider/provider.dart';
+import '../widgets/tab_button.dart';
 
 import '../helpers/map_cardColor.dart';
 import '../widgets/poke_about.dart';
@@ -153,11 +155,49 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
                             ),
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _buttonBuilder(widget.pokemon!, 'ABOUT', 0),
-                              _buttonBuilder(widget.pokemon!, 'STATS', 1),
-                              _buttonBuilder(widget.pokemon!, 'MOVES', 2),
+                              Flexible(
+                                flex: 2,
+                                child: TabButton(
+                                  pokeData: widget.pokemon!,
+                                  title: AppLocalizations.of(context)!
+                                      .about
+                                      .toUpperCase(),
+                                  index: 0,
+                                  selectedIndex: _selectedIndex,
+                                  onTap: () =>
+                                      setState(() => _selectedIndex = 0),
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                flex: 3,
+                                child: TabButton(
+                                  pokeData: widget.pokemon!,
+                                  title: AppLocalizations.of(context)!
+                                      .stats
+                                      .toUpperCase(),
+                                  index: 1,
+                                  selectedIndex: _selectedIndex,
+                                  onTap: () =>
+                                      setState(() => _selectedIndex = 1),
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                flex: 2,
+                                child: TabButton(
+                                  pokeData: widget.pokemon!,
+                                  title: AppLocalizations.of(context)!
+                                      .moves
+                                      .toUpperCase(),
+                                  index: 2,
+                                  selectedIndex: _selectedIndex,
+                                  onTap: () =>
+                                      setState(() => _selectedIndex = 2),
+                                ),
+                              ),
                             ],
                           ),
                           _selectedIndex == 0
@@ -175,39 +215,5 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
                   ),
                 ],
               ));
-  }
-
-  Widget _buttonBuilder(Pokemon pokeData, String title, int myIndex) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedIndex = myIndex;
-        });
-      },
-      child: Container(
-        height: 35,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: _selectedIndex == myIndex
-              ? setTypeColor(pokeData.type1)
-              : Colors.transparent,
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w800,
-                color: _selectedIndex == myIndex
-                    ? Colors.white
-                    : setTypeColor(pokeData.type1),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

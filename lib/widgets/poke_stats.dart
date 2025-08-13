@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 
 import '../helpers/map_cardColor.dart';
 import '../models/pokemon.dart';
@@ -73,12 +74,12 @@ class PokeStats extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 15),
-          statsBar('HP', pokeData.hp),
-          statsBar('ATK', pokeData.attack),
-          statsBar('DEF', pokeData.defense),
-          statsBar('SATK', pokeData.spAttack),
-          statsBar('SDEF', pokeData.spDefense),
-          statsBar('SPD', pokeData.speed),
+          statsBar(AppLocalizations.of(context)!.hp, pokeData.hp),
+          statsBar(AppLocalizations.of(context)!.atk, pokeData.attack),
+          statsBar(AppLocalizations.of(context)!.def, pokeData.defense),
+          statsBar(AppLocalizations.of(context)!.satk, pokeData.spAttack),
+          statsBar(AppLocalizations.of(context)!.sdef, pokeData.spDefense),
+          statsBar(AppLocalizations.of(context)!.spd, pokeData.speed),
         ],
       ),
     );

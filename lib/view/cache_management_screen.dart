@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../view_model/pokemon_view_model.dart';
 
@@ -29,23 +30,25 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
       });
     } catch (e) {
       setState(() => _isLoading = false);
-      _showErrorSnackBar('Error loading cache stats: $e');
+      _showErrorSnackBar(
+          AppLocalizations.of(context)!.errorLoadingStats(e.toString()));
     }
   }
 
   Future<void> _clearAllCache() async {
     final confirmed = await _showConfirmDialog(
-      'Clear All Cache',
-      'This will remove all cached Pokemon data. The app will need to reload data from the internet.',
+      AppLocalizations.of(context)!.clearAllCacheTitle,
+      AppLocalizations.of(context)!.clearAllCacheMessage,
     );
 
     if (confirmed) {
       try {
         await context.read<PokemonViewModel>().clearCache();
-        _showSuccessSnackBar('Cache cleared successfully');
+        _showSuccessSnackBar(AppLocalizations.of(context)!.cacheCleared);
         await _loadCacheStats();
       } catch (e) {
-        _showErrorSnackBar('Error clearing cache: $e');
+        _showErrorSnackBar(
+            AppLocalizations.of(context)!.errorClearingCache(e.toString()));
       }
     }
   }
@@ -53,27 +56,29 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
   Future<void> _clearExpiredCache() async {
     try {
       await context.read<PokemonViewModel>().clearExpiredCache();
-      _showSuccessSnackBar('Expired cache cleared successfully');
+      _showSuccessSnackBar(AppLocalizations.of(context)!.expiredCacheCleared);
       await _loadCacheStats();
     } catch (e) {
-      _showErrorSnackBar('Error clearing expired cache: $e');
+      _showErrorSnackBar(
+          AppLocalizations.of(context)!.errorClearingCache(e.toString()));
     }
   }
 
   Future<void> _preCacheImages() async {
     final confirmed = await _showConfirmDialog(
-      'Pre-cache Images',
-      'This will download Pokemon images for offline viewing. This may take a few minutes and use data.',
+      AppLocalizations.of(context)!.preCacheImagesTitle,
+      AppLocalizations.of(context)!.preCacheImagesMessage,
     );
 
     if (confirmed) {
       try {
-        _showSuccessSnackBar('Starting image pre-caching...');
+        _showSuccessSnackBar(AppLocalizations.of(context)!.startingImageCache);
         await context.read<PokemonViewModel>().preCacheAllImages();
-        _showSuccessSnackBar('Images pre-cached successfully');
+        _showSuccessSnackBar(AppLocalizations.of(context)!.imagesCacheComplete);
         await _loadCacheStats();
       } catch (e) {
-        _showErrorSnackBar('Error pre-caching images: $e');
+        _showErrorSnackBar(
+            AppLocalizations.of(context)!.errorPreCachingImages(e.toString()));
       }
     }
   }
@@ -87,11 +92,11 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: const Text('Cancel'),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Confirm'),
+                child: Text(AppLocalizations.of(context)!.confirm),
               ),
             ],
           ),
@@ -121,7 +126,7 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cache Management'),
+        title: Text(AppLocalizations.of(context)!.cacheManagement),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -154,9 +159,9 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
               children: [
                 const Icon(Icons.analytics, color: Colors.blue),
                 const SizedBox(width: 8),
-                const Text(
-                  'Cache Statistics',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.cacheStatistics,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -165,28 +170,30 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
                 IconButton(
                   icon: const Icon(Icons.refresh),
                   onPressed: _loadCacheStats,
-                  tooltip: 'Refresh Stats',
+                  tooltip: AppLocalizations.of(context)!.refreshStats,
                 ),
               ],
             ),
             const Divider(),
             _buildStatRow(
-              'Pokemon Details Cached',
+              AppLocalizations.of(context)!.pokemonDetailsCached,
               '${_cacheStats['pokemon_details_count'] ?? 0}',
               Icons.catching_pokemon,
             ),
             _buildStatRow(
-              'Pokemon Cards Cached',
+              AppLocalizations.of(context)!.pokemonCardsCached,
               '${_cacheStats['pokemon_cards_count'] ?? 0}',
               Icons.style,
             ),
             _buildStatRow(
-              'Main List Cached',
-              _cacheStats['has_main_list'] == true ? 'Yes' : 'No',
+              AppLocalizations.of(context)!.mainListCached,
+              _cacheStats['has_main_list'] == true
+                  ? AppLocalizations.of(context)!.yes
+                  : AppLocalizations.of(context)!.no,
               Icons.list,
             ),
             _buildStatRow(
-              'Cache Size',
+              AppLocalizations.of(context)!.cacheSize,
               '${(_cacheStats['cache_size_mb'] ?? 0.0).toStringAsFixed(2)} MB',
               Icons.storage,
             ),
@@ -229,13 +236,13 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
-                Icon(Icons.settings, color: Colors.orange),
-                SizedBox(width: 8),
+                const Icon(Icons.settings, color: Colors.orange),
+                const SizedBox(width: 8),
                 Text(
-                  'Cache Actions',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.cacheActions,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -246,22 +253,23 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
             ListTile(
               leading:
                   const Icon(Icons.cleaning_services, color: Colors.orange),
-              title: const Text('Clear Expired Cache'),
-              subtitle: const Text('Remove only expired cache entries'),
+              title: Text(AppLocalizations.of(context)!.clearExpiredCache),
+              subtitle:
+                  Text(AppLocalizations.of(context)!.clearExpiredCacheDesc),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _clearExpiredCache,
             ),
             ListTile(
               leading: const Icon(Icons.image, color: Colors.blue),
-              title: const Text('Pre-cache Images'),
-              subtitle: const Text('Download images for offline viewing'),
+              title: Text(AppLocalizations.of(context)!.preCacheImages),
+              subtitle: Text(AppLocalizations.of(context)!.preCacheImagesDesc),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _preCacheImages,
             ),
             ListTile(
               leading: const Icon(Icons.delete_forever, color: Colors.red),
-              title: const Text('Clear All Cache'),
-              subtitle: const Text('Remove all cached data'),
+              title: Text(AppLocalizations.of(context)!.clearAllCache),
+              subtitle: Text(AppLocalizations.of(context)!.clearAllCacheDesc),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: _clearAllCache,
             ),
@@ -278,13 +286,13 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
-                Icon(Icons.info, color: Colors.green),
-                SizedBox(width: 8),
+                const Icon(Icons.info, color: Colors.green),
+                const SizedBox(width: 8),
                 Text(
-                  'About Caching',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.aboutCaching,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -292,28 +300,28 @@ class _CacheManagementScreenState extends State<CacheManagementScreen> {
               ],
             ),
             const Divider(),
-            const Text(
-              'Cache Benefits:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            Text(
+              AppLocalizations.of(context)!.cacheBenefits,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            _buildInfoPoint('• Faster app loading times'),
-            _buildInfoPoint('• Reduced data usage'),
-            _buildInfoPoint('• Works offline for cached Pokemon'),
-            _buildInfoPoint('• Images cached for offline viewing'),
-            _buildInfoPoint('• Improved user experience'),
+            _buildInfoPoint(AppLocalizations.of(context)!.fasterLoading),
+            _buildInfoPoint(AppLocalizations.of(context)!.reducedDataUsage),
+            _buildInfoPoint(AppLocalizations.of(context)!.worksOffline),
+            _buildInfoPoint(AppLocalizations.of(context)!.imagesCached),
+            _buildInfoPoint(AppLocalizations.of(context)!.improvedExperience),
             const SizedBox(height: 16),
-            const Text(
-              'Cache Details:',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            Text(
+              AppLocalizations.of(context)!.cacheDetails,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            _buildInfoPoint('• Cache expires after 24 hours'),
-            _buildInfoPoint('• Automatically clears expired data'),
-            _buildInfoPoint('• Stores Pokemon details and images'),
-            _buildInfoPoint('• Images auto-cached when viewed online'),
-            _buildInfoPoint('• Manual image pre-caching available'),
-            _buildInfoPoint('• Safe to clear anytime'),
+            _buildInfoPoint(AppLocalizations.of(context)!.cacheExpires),
+            _buildInfoPoint(AppLocalizations.of(context)!.autoClears),
+            _buildInfoPoint(AppLocalizations.of(context)!.storesData),
+            _buildInfoPoint(AppLocalizations.of(context)!.autoImageCache),
+            _buildInfoPoint(AppLocalizations.of(context)!.manualImageCache),
+            _buildInfoPoint(AppLocalizations.of(context)!.safeToClear),
           ],
         ),
       ),

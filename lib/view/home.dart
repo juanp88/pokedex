@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
 import 'package:poke_app/widgets/home_header.dart';
-import 'package:poke_app/widgets/pokemon_listview.dart';
+import 'package:poke_app/widgets/pokemon_listview.dart' show PokemonListView;
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             resizeToAvoidBottomInset: false,
             body: Column(
               children: [
-                homeHeader(context),
+                const HomeHeader(),
                 // Cache indicator
                 if (pokemonViewModel.isUsingCache)
                   Container(
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Text(
-                          'Offline mode',
+                          AppLocalizations.of(context)!.offlineMode,
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.orange[700],
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Using cached data',
+                              AppLocalizations.of(context)!.usingCachedData,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.orange[700],
@@ -95,19 +96,21 @@ class _HomePageState extends State<HomePage> {
                                     color: Colors.grey,
                                   ),
                                   const SizedBox(height: 16),
-                                  const Text(
-                                    'No Internet Connection',
-                                    style: TextStyle(
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .noInternetConnection,
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
-                                    'No cached Pokemon data available.\nConnect to the internet to load Pokemon.',
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .noInternetMessage,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey,
                                     ),
@@ -118,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                                       pokemonViewModel.resetOfflineState();
                                       pokemonViewModel.getPokemons();
                                     },
-                                    child: const Text('Retry'),
+                                    child: Text(
+                                        AppLocalizations.of(context)!.retry),
                                   ),
                                 ],
                               ),
@@ -126,8 +130,9 @@ class _HomePageState extends State<HomePage> {
                           )
                         : Expanded(
                             flex: 4,
-                            child: pokemonListView(
-                                pokemonViewModel, _scrollController),
+                            child: PokemonListView(
+                                pokemonViewModel: pokemonViewModel,
+                                scrollController: _scrollController),
                           )
               ],
             )));

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:poke_app/helpers/map_cardColor.dart';
 import 'package:poke_app/models/pokemon.dart';
-
-import '../models/pokemons_detail_model.dart';
 
 class AboutPokemonWidget extends StatelessWidget {
   final Pokemon? pokemon;
@@ -14,13 +13,13 @@ class AboutPokemonWidget extends StatelessWidget {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            SizedBox(height: 20),
-            Text('Height'),
-            SizedBox(height: 20),
-            Text('Weight'),
-            SizedBox(height: 20),
-            Text('Ability'),
+          children: [
+            const SizedBox(height: 20),
+            Text(AppLocalizations.of(context)!.height),
+            const SizedBox(height: 20),
+            Text(AppLocalizations.of(context)!.weight),
+            const SizedBox(height: 20),
+            Text(AppLocalizations.of(context)!.abilities),
           ],
         ),
         const SizedBox(

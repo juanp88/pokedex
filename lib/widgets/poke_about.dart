@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 
 import '../models/pokemon.dart';
@@ -53,7 +54,7 @@ class PokeAbout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Pokedex Data',
+            AppLocalizations.of(context)!.pokedexData,
             style: TextStyle(
               color: setTypeColor(pokeData.type1),
               fontSize: 17,
@@ -65,11 +66,14 @@ class PokeAbout extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                rowBuilder('Species', pokeData.species),
-                rowBuilder('Height', '${convertValue(pokeData.height)} m'),
-                rowBuilder('Weight', '${convertValue(pokeData.weight)} kg'),
                 rowBuilder(
-                  'Abilities',
+                    AppLocalizations.of(context)!.species, pokeData.species),
+                rowBuilder(AppLocalizations.of(context)!.height,
+                    '${convertValue(pokeData.height)} ${AppLocalizations.of(context)!.meters}'),
+                rowBuilder(AppLocalizations.of(context)!.weight,
+                    '${convertValue(pokeData.weight)} ${AppLocalizations.of(context)!.kilograms}'),
+                rowBuilder(
+                  AppLocalizations.of(context)!.abilities,
                   '${toBeginningOfSentenceCase<String?>(pokeData.ability1)!}\n${toBeginningOfSentenceCase<String?>(pokeData.ability2)!}\n${toBeginningOfSentenceCase<String?>(pokeData.ability3)!}',
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import 'package:poke_app/models/pokemon.dart';
 import 'package:poke_app/view/pokemon_screen.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class _SearchBarState extends State<SearchBar> {
               color: Colors.black,
             ),
           ),
-          hintText: "What Pokémon are you looking for? ",
+          hintText: AppLocalizations.of(context)!.searchHint,
         ),
         onSubmitted: (value) async {
           if (value.isNotEmpty) {
@@ -82,12 +83,15 @@ class _SearchBarState extends State<SearchBar> {
               );
             } else {
               // Show error message if Pokemon not found
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Pokémon "$value" not found!'),
-                  backgroundColor: Colors.red,
-                ),
-              );
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        AppLocalizations.of(context)!.pokemonNotFound(value)),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
             }
           }
         },
