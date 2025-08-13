@@ -7,8 +7,6 @@ import 'package:poke_app/models/pokemon_model.dart';
 import 'package:poke_app/utils/api_status.dart';
 import 'package:poke_app/utils/config.dart';
 
-import '../models/pokemons_detail_model.dart';
-
 class PokemonService {
   // Simple cache to avoid repeated API calls
   static final Map<String, dynamic> _cache = {};

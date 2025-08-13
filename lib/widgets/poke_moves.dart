@@ -7,7 +7,7 @@ import '../models/pokemon.dart';
 
 class PokeMoves extends StatelessWidget {
   final Pokemon pokeData;
-  PokeMoves(this.pokeData);
+  const PokeMoves(this.pokeData, {super.key});
 
   Widget moveLabel(String text, dynamic pokeData) {
     return Container(

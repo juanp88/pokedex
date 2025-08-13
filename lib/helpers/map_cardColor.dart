@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 Color setCardColor(String type) {
   type = type.toLowerCase();
-  if (type == null) {
-    return Color(0xffdbd9d9);
-  }
   switch (type) {
     case 'fire':
       return Color(0xfffa9950);
@@ -67,9 +64,6 @@ Color setCardColor(String type) {
 
 Color setTypeColor(String type) {
   type = type.toLowerCase();
-  if (type == null) {
-    return Color(0xffdbd9d9);
-  }
   switch (type) {
     case 'fire':
       return Color(0xffF08030);

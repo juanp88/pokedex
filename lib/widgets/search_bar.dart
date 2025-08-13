@@ -6,13 +6,15 @@ import 'package:provider/provider.dart';
 import '../view_model/pokemon_view_model.dart';
 
 class SearchBar extends StatefulWidget {
+  const SearchBar({super.key});
+
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
   final _textController = TextEditingController();
-  bool _validate = false;
+  final bool _validate = false;
 
   @override
   void dispose() {

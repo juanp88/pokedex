@@ -6,7 +6,8 @@ import '../helpers/map_typeIcon.dart';
 
 class TypeCard extends StatelessWidget {
   final String type;
-  TypeCard(this.type);
+
+  const TypeCard(this.type, {super.key});
   @override
   Widget build(BuildContext context) {
     String typeIcon = setTypeIcon(type);

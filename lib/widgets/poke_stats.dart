@@ -6,7 +6,7 @@ import '../models/pokemon.dart';
 class PokeStats extends StatelessWidget {
   final Pokemon pokeData;
 
-  const PokeStats(this.pokeData, {Key? key}) : super(key: key);
+  const PokeStats(this.pokeData, {super.key});
 
   String convertValue(double value) {
     double initValue = value * 100;
@@ -48,7 +48,7 @@ class PokeStats extends StatelessWidget {
           const SizedBox(width: 12),
           // Flexible progress bar that adapts to available space
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 8,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(4)),

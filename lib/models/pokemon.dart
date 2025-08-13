@@ -103,6 +103,56 @@ class Pokemon with ChangeNotifier {
       moves: tempMovesList,
     );
   }
+
+  // Add caching support methods
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'sprites': sprites?.toJson(),
+      'type1': type1,
+      'type2': type2,
+      'hp': hp,
+      'attack': attack,
+      'defense': defense,
+      'speed': speed,
+      'spAttack': spAttack,
+      'spDefense': spDefense,
+      'description': description,
+      'height': height,
+      'weight': weight,
+      'species': species,
+      'ability1': ability1,
+      'ability2': ability2,
+      'ability3': ability3,
+      'moves': moves,
+    };
+  }
+
+  factory Pokemon.fromCachedJson(Map<String, dynamic> json) {
+    return Pokemon(
+      id: json['id'],
+      name: json['name'],
+      sprites:
+          json['sprites'] != null ? Sprites.fromJson(json['sprites']) : null,
+      type1: json['type1'],
+      type2: json['type2'],
+      hp: json['hp'],
+      attack: json['attack'],
+      defense: json['defense'],
+      speed: json['speed'],
+      spAttack: json['spAttack'],
+      spDefense: json['spDefense'],
+      description: json['description'],
+      height: json['height'],
+      weight: json['weight'],
+      species: json['species'],
+      ability1: json['ability1'],
+      ability2: json['ability2'],
+      ability3: json['ability3'],
+      moves: json['moves'],
+    );
+  }
 }
 
 class Sprites {
@@ -137,21 +187,21 @@ class Sprites {
     frontFemale = json['front_female'];
     frontShiny = json['front_shiny'];
     frontShinyFemale = json['front_shiny_female'];
-    other = json['other'] != null ? new Other.fromJson(json['other']) : null;
+    other = json['other'] != null ? Other.fromJson(json['other']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['back_default'] = this.backDefault;
-    data['back_female'] = this.backFemale;
-    data['back_shiny'] = this.backShiny;
-    data['back_shiny_female'] = this.backShinyFemale;
-    data['front_default'] = this.frontDefault;
-    data['front_female'] = this.frontFemale;
-    data['front_shiny'] = this.frontShiny;
-    data['front_shiny_female'] = this.frontShinyFemale;
-    if (this.other != null) {
-      data['other'] = this.other!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['back_default'] = backDefault;
+    data['back_female'] = backFemale;
+    data['back_shiny'] = backShiny;
+    data['back_shiny_female'] = backShinyFemale;
+    data['front_default'] = frontDefault;
+    data['front_female'] = frontFemale;
+    data['front_shiny'] = frontShiny;
+    data['front_shiny_female'] = frontShinyFemale;
+    if (other != null) {
+      data['other'] = other!.toJson();
     }
     return data;
   }
@@ -166,24 +216,24 @@ class Other {
 
   Other.fromJson(Map<String, dynamic> json) {
     dreamWorld = json['dream_world'] != null
-        ? new DreamWorld.fromJson(json['dream_world'])
+        ? DreamWorld.fromJson(json['dream_world'])
         : null;
-    home = json['home'] != null ? new Home.fromJson(json['home']) : null;
+    home = json['home'] != null ? Home.fromJson(json['home']) : null;
     officialArtwork = json['official-artwork'] != null
-        ? new OfficialArtwork.fromJson(json['official-artwork'])
+        ? OfficialArtwork.fromJson(json['official-artwork'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.dreamWorld != null) {
-      data['dream_world'] = this.dreamWorld!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (dreamWorld != null) {
+      data['dream_world'] = dreamWorld!.toJson();
     }
-    if (this.home != null) {
-      data['home'] = this.home!.toJson();
+    if (home != null) {
+      data['home'] = home!.toJson();
     }
-    if (this.officialArtwork != null) {
-      data['official-artwork'] = this.officialArtwork!.toJson();
+    if (officialArtwork != null) {
+      data['official-artwork'] = officialArtwork!.toJson();
     }
     return data;
   }
@@ -191,7 +241,7 @@ class Other {
 
 class DreamWorld {
   String? frontDefault;
-  Null? frontFemale;
+  Null frontFemale;
 
   DreamWorld({this.frontDefault, this.frontFemale});
 
@@ -201,9 +251,9 @@ class DreamWorld {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['front_default'] = this.frontDefault;
-    data['front_female'] = this.frontFemale;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['front_default'] = frontDefault;
+    data['front_female'] = frontFemale;
     return data;
   }
 }
@@ -228,11 +278,11 @@ class Home {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['front_default'] = this.frontDefault;
-    data['front_female'] = this.frontFemale;
-    data['front_shiny'] = this.frontShiny;
-    data['front_shiny_female'] = this.frontShinyFemale;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['front_default'] = frontDefault;
+    data['front_female'] = frontFemale;
+    data['front_shiny'] = frontShiny;
+    data['front_shiny_female'] = frontShinyFemale;
     return data;
   }
 }
@@ -247,8 +297,8 @@ class OfficialArtwork {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['front_default'] = this.frontDefault;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['front_default'] = frontDefault;
     return data;
   }
 }

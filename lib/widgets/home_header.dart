@@ -1,17 +1,46 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:poke_app/widgets/search_bar.dart';
+import '../view/cache_management_screen.dart';
 
-//falta implementar función de busqueda.
-
-Widget homeHeader() {
+Widget homeHeader(BuildContext context) {
   return Expanded(
     flex: 2,
     child: Container(
       padding: const EdgeInsets.all(40),
-      child: Column(children: const [
-        Expanded(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+        color: Colors.red,
+        image: DecorationImage(
+            opacity: 0.2,
+            image: AssetImage("assets/images/PokeballShadow3.png"),
+            fit: BoxFit.scaleDown),
+      ),
+      child: Column(
+        children: [
+          // Cache management button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.storage,
+                  color: Colors.white,
+                  size: 28,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CacheManagementScreen(),
+                    ),
+                  );
+                },
+                tooltip: 'Cache Management',
+              ),
+            ],
+          ),
+          // Title
+          const Expanded(
             flex: 2,
             child: SizedBox(
               width: 500,
@@ -25,19 +54,9 @@ Widget homeHeader() {
                       color: Color.fromARGB(255, 255, 192, 2)),
                 ),
               ),
-            )),
-        //Expanded(flex: 2, child: SearchBar())
-      ]),
-
-      //color: Colors.red,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-        color: Colors.red,
-        image: DecorationImage(
-            opacity: 0.2,
-            image: AssetImage("assets/images/PokeballShadow3.png"),
-            fit: BoxFit.scaleDown),
+            ),
+          ),
+        ],
       ),
     ),
   );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:poke_app/models/pokemon.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
@@ -12,7 +13,7 @@ import '../widgets/type_card.dart';
 
 class PokeDetailScreen extends StatefulWidget {
   final Pokemon? pokemon;
-  const PokeDetailScreen({Key? key, required this.pokemon}) : super(key: key);
+  const PokeDetailScreen({super.key, required this.pokemon});
 
   @override
   _PokeDetailScreenState createState() => _PokeDetailScreenState();
@@ -20,6 +21,37 @@ class PokeDetailScreen extends StatefulWidget {
 
 class _PokeDetailScreenState extends State<PokeDetailScreen> {
   int _selectedIndex = 0;
+
+  Widget _buildPokemonImage() {
+    // Get the image URL safely
+    String? imageUrl;
+    try {
+      imageUrl = widget.pokemon?.sprites?.other?.officialArtwork?.frontDefault;
+    } catch (e) {
+      imageUrl = null;
+    }
+
+    // Check if we have a valid image URL
+    if (imageUrl == null ||
+        imageUrl.isEmpty ||
+        !Uri.tryParse(imageUrl)!.hasAbsolutePath) {
+      return Image.asset(
+        'assets/images/pokeLoad.gif',
+        fit: BoxFit.contain,
+      );
+    }
+
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      placeholder: (context, url) => Image.asset(
+        'assets/images/pokeLoad.gif',
+      ),
+      errorWidget: (context, url, error) => Image.asset(
+        'assets/images/pokeLoad.gif',
+      ),
+      fit: BoxFit.contain,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +94,7 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
                         left: 35,
                         child: SizedBox(
                           height: 200,
-                          child: FadeInImage.assetNetwork(
-                            placeholder: 'assets/images/pokeLoad.gif',
-                            image: widget.pokemon!.sprites!.other!
-                                .officialArtwork!.frontDefault
-                                .toString(),
-                            //imageScale: 0.15,
-                          ),
+                          child: _buildPokemonImage(),
                         ),
                       ),
                     ],
@@ -94,7 +120,7 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
                           ),
                           // Pokemon ID
                           Text(
-                            '#' + widget.pokemon!.id.toString(),
+                            '#${widget.pokemon!.id}',
                             style: const TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w800),
                           ),

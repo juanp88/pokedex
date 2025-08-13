@@ -7,7 +7,7 @@ import '../helpers/map_cardColor.dart';
 class PokeAbout extends StatelessWidget {
   final Pokemon pokeData;
 
-  const PokeAbout(this.pokeData, {Key? key}) : super(key: key);
+  const PokeAbout(this.pokeData, {super.key});
 
   String convertValue(dynamic value) {
     double convertedValue = value / 10;
@@ -66,15 +66,11 @@ class PokeAbout extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: [
                 rowBuilder('Species', pokeData.species),
-                rowBuilder('Height', convertValue(pokeData.height) + ' m'),
-                rowBuilder('Weight', convertValue(pokeData.weight) + ' kg'),
+                rowBuilder('Height', '${convertValue(pokeData.height)} m'),
+                rowBuilder('Weight', '${convertValue(pokeData.weight)} kg'),
                 rowBuilder(
                   'Abilities',
-                  toBeginningOfSentenceCase<String?>(pokeData.ability1)! +
-                      '\n' +
-                      toBeginningOfSentenceCase<String?>(pokeData.ability2)! +
-                      '\n' +
-                      toBeginningOfSentenceCase<String?>(pokeData.ability3)!,
+                  '${toBeginningOfSentenceCase<String?>(pokeData.ability1)!}\n${toBeginningOfSentenceCase<String?>(pokeData.ability2)!}\n${toBeginningOfSentenceCase<String?>(pokeData.ability3)!}',
                 ),
               ],
             ),

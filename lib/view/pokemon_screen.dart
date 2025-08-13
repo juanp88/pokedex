@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:poke_app/helpers/map_cardColor.dart';
 import 'package:poke_app/models/pokemon.dart';
 import '../widgets/aboutpokemon_widget.dart';
@@ -13,6 +14,37 @@ class PokemonScreen extends StatefulWidget {
 
 class _PokemonScreenState extends State<PokemonScreen>
     with TickerProviderStateMixin {
+  Widget _buildPokemonImage() {
+    // Get the image URL safely
+    String? imageUrl;
+    try {
+      imageUrl = widget.pokemon?.sprites?.other?.officialArtwork?.frontDefault;
+    } catch (e) {
+      imageUrl = null;
+    }
+
+    // Check if we have a valid image URL
+    if (imageUrl == null ||
+        imageUrl.isEmpty ||
+        !Uri.tryParse(imageUrl)!.hasAbsolutePath) {
+      return Image.asset(
+        'assets/images/pokeLoad.gif',
+        fit: BoxFit.contain,
+      );
+    }
+
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      placeholder: (context, url) => Image.asset(
+        'assets/images/pokeLoad.gif',
+      ),
+      errorWidget: (context, url, error) => Image.asset(
+        'assets/images/pokeLoad.gif',
+      ),
+      fit: BoxFit.contain,
+    );
+  }
+
   TabController? _tabController;
 
   void init(TickerProvider tickerProvider) {
@@ -124,9 +156,7 @@ class _PokemonScreenState extends State<PokemonScreen>
             child: SizedBox(
               height: 200,
               width: 200,
-              child: Image.network(widget
-                  .pokemon!.sprites!.other!.officialArtwork!.frontDefault
-                  .toString()),
+              child: _buildPokemonImage(),
             ),
           )
         ],
@@ -138,13 +168,13 @@ class _PokemonScreenState extends State<PokemonScreen>
     return Container(
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-      child: Text(widget.pokemon!.name.toString()),
       decoration: BoxDecoration(
         color: setTypeColor(
           widget.pokemon?.type1,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
+      child: Text(widget.pokemon!.name.toString()),
     );
   }
 }

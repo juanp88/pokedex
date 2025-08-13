@@ -110,7 +110,7 @@ class Sprites {
       );
 
   Map<String, dynamic> toJson() => {
-        "other": other == null ? null : other!.toJson(),
+        "other": other?.toJson(),
       };
 }
 

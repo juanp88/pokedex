@@ -6,7 +6,7 @@ import '../models/pokemons_detail_model.dart';
 
 class AboutPokemonWidget extends StatelessWidget {
   final Pokemon? pokemon;
-  const AboutPokemonWidget({Key? key, required this.pokemon}) : super(key: key);
+  const AboutPokemonWidget({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +31,11 @@ class AboutPokemonWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                (pokemon!.height! / 10).toString() + ' cm',
+                '${pokemon!.height! / 10} cm',
               ),
               const SizedBox(height: 20),
               Text(
-                (pokemon!.weight! / 10).toString() + ' kg',
+                '${pokemon!.weight! / 10} kg',
               ),
               const SizedBox(height: 20),
               Wrap(
