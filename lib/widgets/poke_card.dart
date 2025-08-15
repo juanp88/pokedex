@@ -90,11 +90,12 @@ class PokeCard extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
         margin: const EdgeInsets.only(bottom: 20, top: 5, left: 5, right: 5),
         decoration: BoxDecoration(
-          color: setCardColor(poke.type1.toString()),
+          color: setCardColor(poke.type1?.toString() ?? 'normal'),
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: setCardColor(poke.type1.toString()).withValues(alpha: 0.5),
+              color: setCardColor(poke.type1?.toString() ?? 'normal')
+                  .withValues(alpha: 0.5),
               blurRadius: 5,
               offset: const Offset(2, 3),
             ),
@@ -122,9 +123,9 @@ class PokeCard extends StatelessWidget {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    if (poke.type1 != null) TypeCard(poke.type1),
+                    if (poke.type1 != null) TypeCard(poke.type1 ?? ""),
                     const SizedBox(width: 5),
-                    if (poke.type2 != null) TypeCard(poke.type2),
+                    if (poke.type2 != null) TypeCard(poke.type2 ?? ""),
                   ],
                 )
               ],

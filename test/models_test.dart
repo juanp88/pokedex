@@ -67,20 +67,28 @@ void main() {
 
       test('CardModel.toJson creates correct JSON', () {
         final card = CardModel(
-          id: 1,
+          id: '1',
           name: 'test',
-          type1: 'normal',
-          type2: null,
-          sprite: 'https://example.com/test.png',
+          sprites: {'front_default': 'https://example.com/test.png'},
+          types: [
+            {
+              'type': {'name': 'normal'}
+            }
+          ],
         );
 
         final json = card.toJson();
 
-        expect(json['id'], 1);
+        expect(json['id'], '1');
         expect(json['name'], 'test');
-        expect(json['type1'], 'normal');
-        expect(json['type2'], isNull);
-        expect(json['sprite'], 'https://example.com/test.png');
+        expect(
+            json['sprites']['front_default'], 'https://example.com/test.png');
+        expect(json['types'][0]['type']['name'], 'normal');
+
+        // Test computed properties
+        expect(card.type1, 'normal');
+        expect(card.type2, isNull);
+        expect(card.sprite, 'https://example.com/test.png');
       });
     });
 

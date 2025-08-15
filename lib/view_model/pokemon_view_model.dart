@@ -191,6 +191,8 @@ class PokemonViewModel extends ChangeNotifier {
 
       if (offlinePokemon != null && offlineCard != null) {
         debugPrint('Loading $name from offline cache (priority mode)');
+        debugPrint(
+            'Cached card type1: ${offlineCard.type1}, type2: ${offlineCard.type2}');
         setCardListModel(index, offlineCard);
         setPokemonDetail(index, offlinePokemon);
         return offlinePokemon;
@@ -203,6 +205,8 @@ class PokemonViewModel extends ChangeNotifier {
 
     if (cachedPokemon != null && cachedCard != null) {
       debugPrint('Loading $name from valid cache');
+      debugPrint(
+          'Cached card type1: ${cachedCard.type1}, type2: ${cachedCard.type2}');
       setCardListModel(index, cachedCard);
       setPokemonDetail(index, cachedPokemon);
       return cachedPokemon;
