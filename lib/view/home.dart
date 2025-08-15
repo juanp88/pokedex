@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:poke_app/widgets/pokeball_sprite_widget.dart';
 import '../l10n/app_localizations.dart';
 import 'package:poke_app/view_model/pokemon_view_model.dart';
 import 'package:poke_app/widgets/home_header.dart';
 import 'package:poke_app/widgets/pokemon_listview.dart' show PokemonListView;
+import 'package:poke_app/widgets/pokeball_sprite_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,8 +39,8 @@ class _HomePageState extends State<HomePage> {
             body: Column(
               children: [
                 const HomeHeader(),
-                // Cache indicator
-                if (pokemonViewModel.isUsingCache)
+                // Cache indicator - only show when actually offline
+                if (pokemonViewModel.isOffline)
                   Container(
                     width: double.infinity,
                     padding:
@@ -77,10 +79,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 pokemonViewModel.isLoading == true
-                    ? Expanded(
+                    ? const Expanded(
                         flex: 3,
                         child: Center(
-                          child: Image.asset('assets/images/pokeLoad.gif'),
+                          child: PokeballSpriteWidget(
+                            size: 100,
+                            animationSpeed: 0.6,
+                          ),
                         ),
                       )
                     : pokemonViewModel.isOffline

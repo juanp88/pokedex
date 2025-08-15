@@ -1,32 +1,39 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:poke_app/models/card_model.dart';
 import 'package:poke_app/models/pokemon.dart';
 import 'package:poke_app/view/poke_detail_screen.dart';
 import 'package:poke_app/widgets/type_card.dart';
+import 'package:poke_app/widgets/pokeball_sprite_widget.dart';
 
 import '../helpers/map_cardColor.dart';
 
-class PokeCard extends StatelessWidget {
-  final CardModel poke;
-  final Pokemon? pokeDetail;
-  final BuildContext context;
+class PokemonImage extends StatelessWidget {
+  final String? imageUrl;
+  final int? pokemonId;
+  final String pokemonName;
 
-  const PokeCard(this.poke, this.pokeDetail, this.context, {super.key});
+  const PokemonImage({
+    super.key,
+    required this.imageUrl,
+    required this.pokemonId,
+    required this.pokemonName,
+  });
 
-  Widget _buildPokemonImage(String? imageUrl) {
-    debugPrint('PokeCard: Building image for ${poke.name} with URL: $imageUrl');
+  @override
+  Widget build(BuildContext context) {
+    debugPrint(
+        'PokemonImage: Building image for $pokemonName with URL: $imageUrl');
 
     String? finalImageUrl = imageUrl;
 
     // If no sprite URL, try to construct one from Pokemon ID
     if (finalImageUrl == null || finalImageUrl.isEmpty) {
-      if (poke.id != null && poke.id.toString().isNotEmpty) {
+      if (pokemonId != null && pokemonId.toString().isNotEmpty) {
         finalImageUrl =
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png';
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonId.png';
         debugPrint(
-            'PokeCard: Constructed fallback URL for ${poke.name}: $finalImageUrl');
+            'PokemonImage: Constructed fallback URL for $pokemonName: $finalImageUrl');
       }
     }
 
@@ -34,27 +41,36 @@ class PokeCard extends StatelessWidget {
     if (finalImageUrl == null ||
         finalImageUrl.isEmpty ||
         !Uri.tryParse(finalImageUrl)!.hasAbsolutePath) {
-      debugPrint('PokeCard: Invalid URL for ${poke.name}, showing placeholder');
-      return Image.asset(
-        'assets/images/pokeLoad.gif',
-        scale: 0.5,
+      debugPrint(
+          'PokemonImage: Invalid URL for $pokemonName, showing placeholder');
+      return const PokeballSpriteWidget(
+        size: 80,
+        animationSpeed: 0.3,
       );
     }
 
     return CachedNetworkImage(
       imageUrl: finalImageUrl,
-      placeholder: (context, url) => Image.asset(
-        'assets/images/pokeLoad.gif',
-        scale: 0.5,
+      placeholder: (context, url) => const PokeballSpriteWidget(
+        size: 80,
+        animationSpeed: 0.3,
       ),
-      errorWidget: (context, url, error) => Image.asset(
-        'assets/images/pokeLoad.gif',
-        scale: 0.5,
+      errorWidget: (context, url, error) => const PokeballSpriteWidget(
+        size: 80,
+        animationSpeed: 0.3,
       ),
       scale: 0.5,
       fadeInDuration: const Duration(milliseconds: 300),
     );
   }
+}
+
+class PokeCard extends StatelessWidget {
+  final CardModel poke;
+  final Pokemon? pokeDetail;
+  final BuildContext context;
+
+  const PokeCard(this.poke, this.pokeDetail, this.context, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +132,11 @@ class PokeCard extends StatelessWidget {
             Positioned(
               right: -35,
               bottom: -50,
-              child: _buildPokemonImage(poke.sprite),
+              child: PokemonImage(
+                imageUrl: poke.sprite,
+                pokemonId: int.parse(poke.id.toString()),
+                pokemonName: poke.name.toString(),
+              ),
             ),
           ],
         ),

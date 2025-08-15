@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:poke_app/widgets/pokeball_sprite_widget.dart';
 import '../l10n/app_localizations.dart';
 
 import 'package:poke_app/models/pokemon.dart';
@@ -37,19 +38,27 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
     if (imageUrl == null ||
         imageUrl.isEmpty ||
         !Uri.tryParse(imageUrl)!.hasAbsolutePath) {
-      return Image.asset(
-        'assets/images/pokeLoad.gif',
-        fit: BoxFit.contain,
+      return const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       );
     }
 
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      placeholder: (context, url) => Image.asset(
-        'assets/images/pokeLoad.gif',
+      placeholder: (context, url) => const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       ),
-      errorWidget: (context, url, error) => Image.asset(
-        'assets/images/pokeLoad.gif',
+      errorWidget: (context, url, error) => const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       ),
       fit: BoxFit.contain,
     );
@@ -66,7 +75,11 @@ class _PokeDetailScreenState extends State<PokeDetailScreen> {
                 ? Colors.white
                 : setCardColor(widget.pokemon!.type1),
         body: providerData.isLoading
-            ? Center(child: Image.asset('assets/images/pokeLoad.gif'))
+            ? const Center(
+                child: PokeballSpriteWidget(
+                size: 50,
+                animationSpeed: 0.5,
+              ))
             : Column(
                 children: [
                   Container(

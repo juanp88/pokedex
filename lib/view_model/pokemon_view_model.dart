@@ -304,7 +304,12 @@ class PokemonViewModel extends ChangeNotifier {
     _pokeMap.clear();
     _pokemonsDetailMap.clear();
     _nextUrl = '';
-    notifyListeners();
+
+    // Reset offline state to ensure fresh fetch
+    resetOfflineState();
+
+    // Automatically trigger fresh data fetch
+    await getPokemons();
   }
 
   Future<Map<String, dynamic>> getCacheStats() async {

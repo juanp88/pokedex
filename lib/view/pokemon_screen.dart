@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../l10n/app_localizations.dart';
 import 'package:poke_app/helpers/map_cardColor.dart';
 import 'package:poke_app/models/pokemon.dart';
+import 'package:poke_app/widgets/pokeball_sprite_widget.dart';
 import '../widgets/aboutpokemon_widget.dart';
 
 class PokemonScreen extends StatefulWidget {
@@ -28,19 +29,27 @@ class _PokemonScreenState extends State<PokemonScreen>
     if (imageUrl == null ||
         imageUrl.isEmpty ||
         !Uri.tryParse(imageUrl)!.hasAbsolutePath) {
-      return Image.asset(
-        'assets/images/pokeLoad.gif',
-        fit: BoxFit.contain,
+      return const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       );
     }
 
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      placeholder: (context, url) => Image.asset(
-        'assets/images/pokeLoad.gif',
+      placeholder: (context, url) => const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       ),
-      errorWidget: (context, url, error) => Image.asset(
-        'assets/images/pokeLoad.gif',
+      errorWidget: (context, url, error) => const Center(
+        child: PokeballSpriteWidget(
+          size: 120,
+          animationSpeed: 0.3,
+        ),
       ),
       fit: BoxFit.contain,
     );
